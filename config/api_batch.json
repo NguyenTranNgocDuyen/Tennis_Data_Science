@@ -1,0 +1,19 @@
+{
+  "provider": "rapidapi_tennis",
+  "host": "tennis-api-atp-wta-itf.p.rapidapi.com",
+  "tour": "atp",
+  "daily_request_budget": 40,
+  "page_size": 500,
+  "lookback_days": 7,
+  "max_stats_requests_per_run": 20,
+  "stats_refresh_days": 7,
+  "stats_empty_retry_days": 1,
+  "minimum_request_interval_seconds": 0.35,
+  "max_retries": 2,
+  "timeout_seconds": 45,
+  "included_rank_ids": [2, 3, 4, 7],
+  "excluded_tournament_patterns": ["(?i)\\b(?:atp|united|laver|hopman) cup\\b", "(?i)olympics", "(?i)next\\s*gen"],
+  "database": "data/api/tennis.sqlite3",
+  "raw_directory": "data/api/raw",
+  "output_directory": "runs/api"
+}

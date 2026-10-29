@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "series": [
+    {"key":"basel", "name":"Basel", "aliases":["Basel","Swiss Indoors Basel - Basel"], "reference":"https://www.atptour.com/en/tournaments/basel/328/overview"},
+    {"key":"vienna", "name":"Vienna", "aliases":["Vienna","Erste Bank Open - Vienna"], "reference":"https://www.atptour.com/en/tournaments/vienna/337/overview"},
+    {"key":"european_open", "name":"European Open", "aliases":["Antwerp","Brussels","European Open - Brussels"], "reference":"https://www.atptour.com/en/news/antwerp-brussels-relocation-2025"},
+    {"key":"almaty_astana", "name":"Almaty Open", "aliases":["Almaty","Astana","Nur-Sultan","Almaty Open - Almaty"], "reference":"https://www.atptour.com/en/news/2024-atp-calendar-update-gijon-almaty"},
+    {"key":"marseille_lyon_indoor", "name":"Marseille Lyon Indoor", "aliases":["Marseille","Grand Prix Auvergne-Rhone-Alpes - Lyon"], "reference":"https://www.atptour.com/en/news/marseille-lyon-relocation"}
+  ],
+  "note":"Lyon clay event is deliberately NOT an alias of Marseille/Lyon indoor. Unknown names retain independent series IDs; no fuzzy city matching."
+}

@@ -1,0 +1,695 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tennis:input:1.0.0",
+  "title": "Tennis CSV input contract 1.0.0",
+  "description": "One raw match per row. CSV lexical strings/null; x-csv defines parsed semantic checks. All columns required, optional VALUES nullable. Dataset-level duplicate policy is in docs/data_contract.md.",
+  "type": "object",
+  "required": [
+    "tourney_id",
+    "tourney_name",
+    "surface",
+    "draw_size",
+    "tourney_level",
+    "tourney_date",
+    "match_num",
+    "winner_id",
+    "winner_seed",
+    "winner_entry",
+    "winner_name",
+    "winner_hand",
+    "winner_ht",
+    "winner_ioc",
+    "winner_age",
+    "loser_id",
+    "loser_seed",
+    "loser_entry",
+    "loser_name",
+    "loser_hand",
+    "loser_ht",
+    "loser_ioc",
+    "loser_age",
+    "score",
+    "best_of",
+    "round",
+    "minutes",
+    "w_ace",
+    "w_df",
+    "w_svpt",
+    "w_1stIn",
+    "w_1stWon",
+    "w_2ndWon",
+    "w_SvGms",
+    "w_bpSaved",
+    "w_bpFaced",
+    "l_ace",
+    "l_df",
+    "l_svpt",
+    "l_1stIn",
+    "l_1stWon",
+    "l_2ndWon",
+    "l_SvGms",
+    "l_bpSaved",
+    "l_bpFaced",
+    "winner_rank",
+    "winner_rank_points",
+    "loser_rank",
+    "loser_rank_points",
+    "source_season",
+    "source_file",
+    "source_row"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "tourney_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Mã giải có tiền tố mùa giải; không suy luận cấu trúc phần còn lại.",
+      "x-csv": {
+        "dtype": "string",
+        "core": true
+      }
+    },
+    "tourney_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tên giải theo nguồn.",
+      "x-csv": {
+        "dtype": "string",
+        "core": true
+      }
+    },
+    "surface": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Mặt sân; trống là chưa biết.",
+      "x-csv": {
+        "dtype": "string",
+        "core": false,
+        "enum": [
+          "Hard",
+          "Clay",
+          "Grass",
+          "Carpet"
+        ]
+      }
+    },
+    "draw_size": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Quy mô nhánh đấu, có thể làm tròn lên lũy thừa 2.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 1
+      }
+    },
+    "tourney_level": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "G Grand Slam; M Masters; A tour khác; F cuối mùa; D Davis Cup; mã khác giữ trong raw.",
+      "x-csv": {
+        "dtype": "string",
+        "core": true
+      }
+    },
+    "tourney_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "YYYYMMDD ngày bắt đầu/tuần giải; KHÔNG phải ngày thực tế từng trận.",
+      "x-csv": {
+        "dtype": "date8",
+        "core": true
+      }
+    },
+    "match_num": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Mã trận trong giải; KHÔNG đảm bảo thứ tự thời gian.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": true,
+        "minimum": 0
+      }
+    },
+    "winner_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Mã người chơi ổn định, dùng để join của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": true,
+        "minimum": 1
+      }
+    },
+    "winner_seed": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Hạt giống (chuỗi, có thể không chỉ là số) của người thắng.",
+      "x-csv": {
+        "dtype": "string",
+        "core": false
+      }
+    },
+    "winner_entry": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Diện vào giải Q WC LL PR... của người thắng.",
+      "x-csv": {
+        "dtype": "string",
+        "core": false
+      }
+    },
+    "winner_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tên của người thắng.",
+      "x-csv": {
+        "dtype": "string",
+        "core": true
+      }
+    },
+    "winner_hand": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tay giao bóng R L U của người thắng.",
+      "x-csv": {
+        "dtype": "string",
+        "core": false,
+        "enum": [
+          "R",
+          "L",
+          "U"
+        ]
+      }
+    },
+    "winner_ht": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Chiều cao cm của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 120,
+        "maximum": 250
+      }
+    },
+    "winner_ioc": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Mã quốc gia IOC của người thắng.",
+      "x-csv": {
+        "dtype": "string",
+        "core": false
+      }
+    },
+    "winner_age": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tuổi ở ngày giải của người thắng.",
+      "x-csv": {
+        "dtype": "number",
+        "core": false,
+        "minimum": 10,
+        "maximum": 80
+      }
+    },
+    "loser_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Mã người chơi ổn định, dùng để join của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": true,
+        "minimum": 1
+      }
+    },
+    "loser_seed": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Hạt giống (chuỗi, có thể không chỉ là số) của người thua.",
+      "x-csv": {
+        "dtype": "string",
+        "core": false
+      }
+    },
+    "loser_entry": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Diện vào giải Q WC LL PR... của người thua.",
+      "x-csv": {
+        "dtype": "string",
+        "core": false
+      }
+    },
+    "loser_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tên của người thua.",
+      "x-csv": {
+        "dtype": "string",
+        "core": true
+      }
+    },
+    "loser_hand": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tay giao bóng R L U của người thua.",
+      "x-csv": {
+        "dtype": "string",
+        "core": false,
+        "enum": [
+          "R",
+          "L",
+          "U"
+        ]
+      }
+    },
+    "loser_ht": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Chiều cao cm của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 120,
+        "maximum": 250
+      }
+    },
+    "loser_ioc": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Mã quốc gia IOC của người thua.",
+      "x-csv": {
+        "dtype": "string",
+        "core": false
+      }
+    },
+    "loser_age": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tuổi ở ngày giải của người thua.",
+      "x-csv": {
+        "dtype": "number",
+        "core": false,
+        "minimum": 10,
+        "maximum": 80
+      }
+    },
+    "score": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tỷ số nguyên văn; RET bỏ cuộc; W/O không thi đấu; DEF truất quyền.",
+      "x-csv": {
+        "dtype": "string",
+        "core": false
+      }
+    },
+    "best_of": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Thể thức tối đa 3 hoặc 5 set.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": true,
+        "minimum": 0,
+        "enum": [
+          "3",
+          "5"
+        ]
+      }
+    },
+    "round": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Vòng đấu theo mã nguồn.",
+      "x-csv": {
+        "dtype": "string",
+        "core": true
+      }
+    },
+    "minutes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Thời lượng phút; thiếu không được thay bằng 0.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 1
+      }
+    },
+    "w_ace": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số ace của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "w_df": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số lỗi kép của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "w_svpt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số điểm giao bóng của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "w_1stIn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số giao bóng một vào sân của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "w_1stWon": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số điểm thắng khi giao bóng một của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "w_2ndWon": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số điểm thắng khi giao bóng hai của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "w_SvGms": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số game giao bóng của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "w_bpSaved": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số break point cứu được của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "w_bpFaced": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số break point đối mặt của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "l_ace": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số ace của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "l_df": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số lỗi kép của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "l_svpt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số điểm giao bóng của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "l_1stIn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số giao bóng một vào sân của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "l_1stWon": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số điểm thắng khi giao bóng một của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "l_2ndWon": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số điểm thắng khi giao bóng hai của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "l_SvGms": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số game giao bóng của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "l_bpSaved": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số break point cứu được của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "l_bpFaced": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số break point đối mặt của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "winner_rank": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Thứ hạng ATP trước hoặc tại ngày giải; số nhỏ là hạng cao của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 1
+      }
+    },
+    "winner_rank_points": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Điểm xếp hạng của người thắng.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "loser_rank": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Thứ hạng ATP trước hoặc tại ngày giải; số nhỏ là hạng cao của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 1
+      }
+    },
+    "loser_rank_points": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Điểm xếp hạng của người thua.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": false,
+        "minimum": 0
+      }
+    },
+    "source_season": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Mùa theo tên file, có thể khác năm của tourney_date.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": true,
+        "minimum": 1968,
+        "maximum": 2100
+      }
+    },
+    "source_file": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tên CSV gốc dùng truy vết.",
+      "x-csv": {
+        "dtype": "string",
+        "core": true
+      }
+    },
+    "source_row": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Số dòng CSV gốc tính cả header là dòng 1.",
+      "x-csv": {
+        "dtype": "integer",
+        "core": true,
+        "minimum": 1
+      }
+    }
+  }
+}

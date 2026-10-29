@@ -1,0 +1,40 @@
+match_id,source_file,source_row,tourney_name,winner_name,loser_name,score,score_status,best_of,minutes
+2015-375:27,atp_matches_2015.csv,294,Montpellier,Richard Gasquet,Jerzy Janowicz,3-0 RET,retired,3,8
+2015-416:39,atp_matches_2015.csv,1290,Rome Masters,Kevin Anderson,Philipp Kohlschreiber,3-0 RET,retired,3,16
+2015-425:16,atp_matches_2015.csv,1057,Barcelona,Nicolas Almagro,Paolo Lorenzi,3-0 RET,retired,3,10
+2015-717:3,atp_matches_2015.csv,962,Houston,Sam Querrey,Marinko Matosevic,4-1 RET,retired,3,19
+2016-0337:278,atp_matches_2016.csv,2854,Vienna,David Ferrer,Kyle Edmund,3-2 RET,retired,3,18
+2016-M001:294,atp_matches_2016.csv,134,Sydney,Gilles Muller,Jeremy Chardy,7-6(5) 6-3,completed,3,1146
+2016-M009:247,atp_matches_2016.csv,1250,Rome Masters,Benoit Paire,Bernard Tomic,1-2 RET,retired,3,8
+2017-0308:297,atp_matches_2017.csv,1259,Munich,Hyeon Chung,Martin Klizan,6-4 3-6 6-2,completed,3,987
+2017-0328:287,atp_matches_2017.csv,2777,Basel,Marton Fucsovics,Leonardo Mayer,3-0 RET,retired,3,13
+2017-0329:291,atp_matches_2017.csv,2614,Tokyo,Yuichi Sugita,Milos Raonic,1-0 RET,retired,3,8
+2017-0410:290,atp_matches_2017.csv,1097,Monte Carlo Masters,Lucas Pouille,Adrian Mannarino,3-0 RET,retired,3,11
+2017-5014:274,atp_matches_2017.csv,2652,Shanghai Masters,Alexander Zverev,Aljaz Bedene,4-0 RET,retired,3,12
+2017-540:130,atp_matches_2017.csv,1754,Wimbledon,Florian Mayer,Viktor Troicki,6-1 RET,retired,5,17
+2017-540:150,atp_matches_2017.csv,1774,Wimbledon,Jared Donaldson,Janko Tipsarevic,5-0 RET,retired,5,12
+2017-540:190,atp_matches_2017.csv,1814,Wimbledon,David Ferrer,Steve Darcis,3-0 RET,retired,5,12
+2018-0360:270,atp_matches_2018.csv,1013,Marrakech,Kyle Edmund,Jiri Vesely,5-0 RET,retired,3,16
+2018-0407:279,atp_matches_2018.csv,524,Rotterdam,Pierre Hugues Herbert,Richard Gasquet,3-1 RET,retired,3,15
+2018-540:224,atp_matches_2018.csv,1839,Wimbledon,Kevin Anderson,John Isner,7-6(6) 6-7(5) 6-7(9) 6-4 26-24,completed,5,396
+2019-0301:291,atp_matches_2019.csv,96,Auckland,Pablo Carreno Busta,David Ferrer,1-1 RET,retired,3,19
+2019-0410:242,atp_matches_2019.csv,911,Monte Carlo Masters,Marco Cecchinato,Damir Dzumhur,4-0 RET,retired,3,19
+2019-6242:276,atp_matches_2019.csv,2032,Winston-Salem,Frances Tiafoe,Jeremy Chardy,4-2 RET,retired,3,18
+2020-0337:287,atp_matches_2020.csv,1213,Vienna,Andrey Rublev,Jannik Sinner,2-1 RET,retired,3,7
+2020-520:1139,atp_matches_2020.csv,972,Roland Garros,Lorenzo Giustino,Corentin Moutet,0-6 7-6(7) 7-6(3) 2-6 18-16,completed,5,365
+2021-8998:268,atp_matches_2021.csv,2266,Great Ocean Road Open,Carlos Alcaraz,Attila Balazs,2-2 RET,retired,3,19
+2021-9426:300,atp_matches_2021.csv,2382,Antalya,Alex De Minaur,Alexander Bublik,2-0 RET,retired,3,7
+2022-0341:299,atp_matches_2022.csv,2252,Metz,Alexander Bublik,Stan Wawrinka,2-1 RET,retired,3,17
+2022-540:170,atp_matches_2022.csv,1616,Wimbledon,Oscar Otte,Christian Harrison,3-1 RET,retired,5,15
+2023-0360:289,atp_matches_2023.csv,884,Marrakech,Roberto Carballes Baena,Dimitar Kuzmanov,2-0 RET,retired,3,5
+2023-0422:287,atp_matches_2023.csv,2059,Cincinnati Masters,Taylor Fritz,Dusan Lajovic,5-0 RET,retired,3,17
+2023-0605:292,atp_matches_2023.csv,2746,Tour Finals,Holger Rune,Stefanos Tsitsipas,2-1 RET,retired,3,17
+2024-0421:243,atp_matches_2024.csv,2082,Canada Masters,Sebastian Korda,Vasek Pospisil,2-1 RET,retired,3,19
+2024-0451:294,atp_matches_2024.csv,465,Doha,Karen Khachanov,Emil Ruusuvuori,3-0 RET,retired,3,13
+2024-6932:285,atp_matches_2024.csv,528,Rio De Janeiro,Thiago Monteiro,Carlos Alcaraz,1-1 RET,retired,3,18
+2024-9410:375,atp_matches_2024.csv,2546,Almaty,Beibit Zhukayev,Tomas Machac,3-1 RET,retired,3,17
+2025-0339:378,atp_matches_2025.csv,26,Brisbane,Jiri Lehecka,Reilly Opelka,4-1 RET,retired,3,13
+2025-0404:347,atp_matches_2025.csv,608,Indian Wells Masters,Daniil Medvedev,Alex Michelsen,2-0 RET,retired,3,10
+2025-0425:381,atp_matches_2025.csv,916,Barcelona,Arthur Fils,Stefanos Tsitsipas,2-0 RET,retired,3,17
+2025-0807:376,atp_matches_2025.csv,506,Acapulco,Brandon Nakashima,Holger Rune,3-0 RET,retired,3,10
+2025-5014:346,atp_matches_2025.csv,2340,Shanghai Masters,Gabriel Diallo,David Goffin,3-0 RET,retired,3,10

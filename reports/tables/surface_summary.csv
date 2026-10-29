@@ -1,0 +1,4 @@
+surface_group,n_matches,n_completed,n_tournaments,n_duration,median_minutes,n_ranked_completed,n_upsets,upset_rate
+Clay,8450,8183,221,7672,107.0,8169,2960,0.36234545231974535
+Grass,3176,3078,76,2768,113.0,3067,1081,0.3524616889468536
+Hard,15948,15338,386,14534,105.0,15288,5367,0.3510596546310832

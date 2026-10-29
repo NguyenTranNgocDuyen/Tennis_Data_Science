@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "source_repository": "Aneeshers/tennis-sackmann-archive",
+  "source_commit": "83733587353df8a41f2fd4f516147d5aa83f5a8d",
+  "original_repository": "https://github.com/JeffSackmann/tennis_atp",
+  "start_season": 2015,
+  "end_season": 2025,
+  "included_levels": ["A", "M", "G", "F"],
+  "excluded_tournament_patterns": ["(?i)\\b(?:atp|united|laver|hopman) cup\\b", "(?i)olympics", "(?i)next\\s*gen"],
+  "sample_seed": 42
+}

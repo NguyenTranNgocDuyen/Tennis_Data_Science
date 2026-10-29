@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "verified_on": "2026-10-29",
+  "valid_match_years": [2026],
+  "tour": "atp",
+  "main_draw_singles_only": true,
+  "best_of_by_rank_id": {"2": 3, "3": 3, "4": 5, "7": 3},
+  "excluded_tournament_patterns": ["(?i)\\b(?:atp|united|laver|hopman) cup\\b", "(?i)olympics", "(?i)next\\s*gen"],
+  "sources": {
+    "atp": "https://www.atptour.com/-/media/files/rulebook/2026/2026-rulebook_31mar26.pdf",
+    "grand_slam": "https://www.itftennis.com/media/5986/grand-slam-rulebook-2026-f2.pdf"
+  },
+  "scope_note": "Derive only when provider best_of is null, for verified 2026 main-draw men's singles levels. Other years/formats remain missing until rules are reviewed. Never infer from number of played sets."
+}

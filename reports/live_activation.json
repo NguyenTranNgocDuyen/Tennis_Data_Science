@@ -1,0 +1,95 @@
+{
+  "verified_at_local": "2026-10-29T11:14:44.734726+07:00",
+  "timezone": [
+    "+07",
+    "+07"
+  ],
+  "ingestion": {
+    "run_id": "baba07d90f4e4d90b837f4006192aad3",
+    "start_date": "2026-10-22",
+    "end_date": "2026-10-28",
+    "status": "succeeded",
+    "summary_json": "{\"cache_hits\":0,\"inserted\":70,\"out_of_scope\":1190,\"pages\":3,\"selected\":70,\"stats_candidates\":68,\"stats_deferred\":48,\"stats_fetched\":20,\"unchanged\":0,\"updated\":0}"
+  },
+  "real_network_requests": 23,
+  "nonempty_stats_records": 20,
+  "current_snapshot": {
+    "snapshot": "snapshots/20261029T041250-774d66e0",
+    "mode": "live",
+    "n_matches": 70,
+    "n_tables": 14
+  },
+  "flow": {
+    "raw_rows": 70,
+    "excluded_scope_rows": 0,
+    "in_scope_rows": 70,
+    "quarantined_rows": 0,
+    "exact_duplicates_removed": 0,
+    "processed_rows": 70,
+    "optional_cells_set_missing": 0
+  },
+  "derived_best_of_rows": 70,
+  "production_jobs": {
+    "vn.khdl.tennis.daily": {
+      "loaded": true,
+      "status_lines": [
+        "state = not running",
+        "runs = 0",
+        "last exit code = (never exited)"
+      ]
+    },
+    "vn.khdl.tennis.weekly": {
+      "loaded": true,
+      "status_lines": [
+        "state = not running",
+        "runs = 0",
+        "last exit code = (never exited)"
+      ]
+    },
+    "vn.khdl.tennis.alerts": {
+      "loaded": true,
+      "status_lines": [
+        "state = not running",
+        "runs = 1",
+        "last exit code = 0"
+      ]
+    }
+  },
+  "launchd_export_healthcheck": "exit_0",
+  "temporary_healthcheck_removed": true,
+  "telegram_notifications": [
+    {
+      "operation_id": "baba07d90f4e4d90b837f4006192aad3",
+      "priority": "P2",
+      "code": "QUARANTINE_RATIO",
+      "status": "sent",
+      "telegram_message_id": "6"
+    },
+    {
+      "operation_id": "baba07d90f4e4d90b837f4006192aad3",
+      "priority": "P3",
+      "code": "RUN_SUMMARY",
+      "status": "sent",
+      "telegram_message_id": "11"
+    },
+    {
+      "operation_id": "8d79e53d215a4ca6bd717fdd60c776ec",
+      "priority": "P4",
+      "code": "RUN_SUMMARY",
+      "status": "sent",
+      "telegram_message_id": "13"
+    },
+    {
+      "operation_id": "8e687aa844ea4d04a177780ba29a5b9c",
+      "priority": "P4",
+      "code": "RUN_SUMMARY",
+      "status": "sent",
+      "telegram_message_id": "14"
+    }
+  ],
+  "tests": {
+    "tests": 112,
+    "failures": 0,
+    "errors": 0
+  }
+}

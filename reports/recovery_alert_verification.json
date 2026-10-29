@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-29",
+  "tests": {
+    "tests": 100,
+    "failures": 0,
+    "errors": 0
+  },
+  "telegram_live_tested": false,
+  "telegram_credentials_configured": false,
+  "schedules_activated": false,
+  "raw_offline_replay_cli_tested": true,
+  "raw_directory_import_cli_tested": true,
+  "resume_cli_cache_hits": 2,
+  "resume_cli_inserted": 0,
+  "resume_cli_updated": 0,
+  "historical_reproducibility": {
+    "offline_reproduction": true,
+    "matched_artifacts": 26,
+    "raw_files_verified": 11,
+    "mismatches": 0,
+    "method": "Fresh output directory, same pinned cached source and code, byte-for-byte SHA256 comparison"
+  },
+  "notebook": {
+    "notebook": "notebooks/member_b_eda.ipynb",
+    "code_cells": 10,
+    "executed_cells": 10,
+    "errors": 0,
+    "image_outputs": 5
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "data": [
+    {
+      "id": 91001,
+      "matchId": 91001,
+      "player1Id": 1001,
+      "player2Id": 1002,
+      "tournamentId": 20001,
+      "roundId": 9,
+      "date": "2026-10-27T14:00:00Z",
+      "result": "6-3 6-4",
+      "result_type": "completed",
+      "match_winner": 1001,
+      "best_of": 3,
+      "player1": {
+        "id": 1001,
+        "name": "Demo Player 1001",
+        "countryAcr": "AAA"
+      },
+      "player2": {
+        "id": 1002,
+        "name": "Demo Player 1002",
+        "countryAcr": "BBB"
+      },
+      "tournament": {
+        "id": 20001,
+        "name": "Demo Tour",
+        "date": "2026-10-26T00:00:00Z",
+        "rankId": 2,
+        "courtId": 1
+      }
+    },
+    {
+      "id": 91101,
+      "matchId": 91101,
+      "player1Id": 1101,
+      "player2Id": 1102,
+      "tournamentId": 20001,
+      "roundId": 9,
+      "date": "2026-10-27T14:00:00Z",
+      "result": "6-3 6-4",
+      "result_type": "completed",
+      "match_winner": 1101,
+      "best_of": 3,
+      "player1": {
+        "id": 1101,
+        "name": "Demo Player 1101",
+        "countryAcr": "AAA"
+      },
+      "player2": {
+        "id": 1102,
+        "name": "Demo Player 1102",
+        "countryAcr": "BBB"
+      },
+      "tournament": {
+        "id": 20001,
+        "name": "Demo Challenger",
+        "date": "2026-10-26T00:00:00Z",
+        "rankId": 1,
+        "courtId": 1
+      }
+    },
+    {
+      "id": 91201,
+      "matchId": 91201,
+      "player1Id": 1201,
+      "player2Id": 1202,
+      "tournamentId": 20001,
+      "roundId": 2,
+      "date": "2026-10-27T14:00:00Z",
+      "result": "6-3 6-4",
+      "result_type": "completed",
+      "match_winner": 1201,
+      "best_of": 3,
+      "player1": {
+        "id": 1201,
+        "name": "Demo Player 1201",
+        "countryAcr": "AAA"
+      },
+      "player2": {
+        "id": 1202,
+        "name": "Demo Player 1202",
+        "countryAcr": "BBB"
+      },
+      "tournament": {
+        "id": 20001,
+        "name": "Demo Tour",
+        "date": "2026-10-26T00:00:00Z",
+        "rankId": 2,
+        "courtId": 1
+      }
+    }
+  ],
+  "pageNo": 1,
+  "pageSize": 500,
+  "hasNextPage": true
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": "2.0.0",
+  "snapshot": "runs/unified/snapshots/acb0d2dbfde4424784d9230043c41e42",
+  "matches": 27644,
+  "canonical_columns": 52,
+  "processed_columns": 77,
+  "tables": 14,
+  "checksum_files_verified": 27,
+  "schema_validation_issues": 0,
+  "duplicate_match_ids": 0,
+  "last_idempotent_run": "d3dc0e2b773f4ea88b90f556207a4b64",
+  "last_incremental_summary": {
+    "inserted": 0,
+    "updated": 0,
+    "unchanged": 27644,
+    "removed_conflicting_or_remapped": 0,
+    "source_inserted": 0,
+    "source_updated": 0,
+    "source_unchanged": 27644,
+    "conflicts": 0,
+    "source_quarantined": 0,
+    "total_matches": 27644,
+    "source_api_records": 70,
+    "api_watermark": "2026-10-29T04:09:03.426253+00:00",
+    "players_source_scoped": 0,
+    "editions_source_scoped": 0
+  },
+  "api_player_linkage": [
+    {
+      "method": "unique_full_name_ioc",
+      "records": 80
+    }
+  ],
+  "api_edition_linkage": [
+    {
+      "method": "explicit_alias",
+      "records": 5
+    }
+  ],
+  "tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "143",
+    "time": "4.175",
+    "timestamp": "2026-10-29T12:02:51.928896+07:00",
+    "hostname": "Nguyens-MacBook-Air.local"
+  },
+  "historical_reproducibility": {
+    "offline_reproduction": true,
+    "matched_artifacts": 26,
+    "raw_files_verified": 11,
+    "mismatches": 0,
+    "method": "Fresh output directory, same pinned cached source and code, byte-for-byte SHA256 comparison"
+  },
+  "weekly_schedule": {
+    "weekday": "Monday",
+    "hour": 7,
+    "minute": 40,
+    "timezone": "Asia/Ho_Chi_Minh",
+    "loaded": true,
+    "command": "scripts/run_unified_load.py --collect --refresh-reference"
+  },
+  "live_network_collection_executed_for_this_acceptance": false,
+  "launchd_stored_data_smoke_test": "passed; exit 0; no HTTP; reused snapshot",
+  "limitations": [
+    "API 2026 coverage is currently 2026-10-22 through 2026-10-28; earlier 2026 dates have not been backfilled.",
+    "Weekly network reconciliation orchestration was configured, not manually rerun today; the common load was exercised on stored live API data.",
+    "Name/IOC identity linkage is recorded evidence; ambiguous future identities require review.",
+    "Local launchd scheduling depends on this Mac and user session availability."
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "offline_reproduction": true,
+  "matched_artifacts": 26,
+  "raw_files_verified": 11,
+  "mismatches": 0,
+  "method": "Fresh output directory, same pinned cached source and code, byte-for-byte SHA256 comparison"
+}

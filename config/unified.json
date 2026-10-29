@@ -1,0 +1,17 @@
+{
+  "schema_version": "2.0.0",
+  "database": "data/unified/tennis.sqlite3",
+  "output_directory": "runs/unified",
+  "reference_directory": "data/reference",
+  "player_overrides": "data/mappings/player_overrides.csv",
+  "edition_overrides": "data/mappings/edition_overrides.csv",
+  "reference_request_limit": 6,
+  "weekly_schedule": {"weekday": 1, "hour": 7, "minute": 40},
+  "policy": {
+    "players": "exact normalized full name and IOC must identify one canonical player; duplicate source IDs merge only with identical DOB evidence; ambiguous matches remain source-scoped and flagged",
+    "early_rounds": "derive R128/R64/R32/R16 from full main-draw bracket slots, never from ordinal alone",
+    "season": "historical source season; API match calendar year as explicit fallback, override for cross-year events or match an existing edition",
+    "conflicts": "quarantine conflicting match outcomes; do not silently overwrite or delete missing source records",
+    "missing_optional": "null, never substitute current rank or invent unavailable statistics"
+  }
+}

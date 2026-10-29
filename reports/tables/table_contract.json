@@ -1,0 +1,787 @@
+{
+  "version": "1.0.0",
+  "format": "UTF-8 CSV, header, empty cell = null, decimal dot",
+  "rates": "proportions 0–1, not percentages",
+  "tables": {
+    "season_summary": {
+      "file": "season_summary.csv",
+      "population_and_definition": "All retained records by source season; completion count, duration coverage and ranked completed-match upset denominator. Rates are proportions 0–1.",
+      "columns": [
+        {
+          "name": "season",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_matches",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_completed",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_tournaments",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_duration",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "median_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "n_ranked_completed",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_upsets",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "upset_rate",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        }
+      ]
+    },
+    "duration_review": {
+      "file": "duration_review.csv",
+      "population_and_definition": "All retained matches flagged minutes <20 or >360; includes short retirements. A review flag is not proof of error and does not delete the record.",
+      "columns": [
+        {
+          "name": "match_id",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "source_file",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "source_row",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "tourney_name",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "winner_name",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "loser_name",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "score",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": true
+        },
+        {
+          "name": "score_status",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "best_of",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "minutes",
+          "dtype": "integer",
+          "unit": "minutes",
+          "nullable": true
+        }
+      ]
+    },
+    "surface_summary": {
+      "file": "surface_summary.csv",
+      "population_and_definition": "All retained records by surface; duration uses only completed records with known positive minutes; upset uses completed records with two known unequal ranks.",
+      "columns": [
+        {
+          "name": "surface_group",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_matches",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_completed",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_tournaments",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_duration",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "median_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "n_ranked_completed",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_upsets",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "upset_rate",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        }
+      ]
+    },
+    "season_surface": {
+      "file": "season_surface.csv",
+      "population_and_definition": "All retained records grouped by source season and surface; same metric definitions as surface_summary.",
+      "columns": [
+        {
+          "name": "season",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "surface_group",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_matches",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_completed",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_tournaments",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_duration",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "median_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "n_ranked_completed",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_upsets",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "upset_rate",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        }
+      ]
+    },
+    "duration_by_surface_format": {
+      "file": "duration_by_surface_format.csv",
+      "population_and_definition": "Completed matches grouped by surface and best_of. n_duration is the nonmissing duration denominator; quantiles use pandas linear interpolation. Review flags retained.",
+      "columns": [
+        {
+          "name": "surface_group",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "best_of",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_matches",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_duration",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "missing_duration",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "mean_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "std_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "p25_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "median_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "p75_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "p95_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "max_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        }
+      ]
+    },
+    "duration_sensitivity": {
+      "file": "duration_sensitivity.csv",
+      "population_and_definition": "Completed matches by surface and best_of, removing minutes outside [20,360] only in this sensitivity table.",
+      "columns": [
+        {
+          "name": "surface_group",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "best_of",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_matches",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_duration",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "missing_duration",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "mean_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "std_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "p25_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "median_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "p75_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "p95_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "max_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        }
+      ]
+    },
+    "upsets_by_surface_format": {
+      "file": "upsets_by_surface_format.csv",
+      "population_and_definition": "Completed matches with known unequal ranks, grouped by surface and best_of. Upset = winner_rank > loser_rank. No missing rank imputation.",
+      "columns": [
+        {
+          "name": "surface_group",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "best_of",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_matches",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_completed",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_tournaments",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_duration",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "median_minutes",
+          "dtype": "number",
+          "unit": "minutes",
+          "nullable": true
+        },
+        {
+          "name": "n_ranked_completed",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_upsets",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "upset_rate",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        }
+      ]
+    },
+    "rank_group_performance": {
+      "file": "rank_group_performance.csv",
+      "population_and_definition": "Completed player-match appearances including both winner and loser. A match contributes twice; group membership uses pre-event ranking. Unknown retained as own group.",
+      "columns": [
+        {
+          "name": "rank_group",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_appearances",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "wins",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_players",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "losses",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "win_rate",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        }
+      ]
+    },
+    "player_summary": {
+      "file": "player_summary.csv",
+      "population_and_definition": "Completed appearances by stable player_id. Name is last observed by season and input order, not an identifier. No inference about intrinsic skill.",
+      "columns": [
+        {
+          "name": "player_id",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "player_name",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_appearances",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "wins",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "losses",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "win_rate",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        }
+      ]
+    },
+    "serve_by_surface": {
+      "file": "serve_by_surface.csv",
+      "population_and_definition": "Completed player-match appearances. Each metric uses paired nonmissing numerator and strictly positive denominator. Rate = sum(numerator)/sum(denominator), not mean of per-match rates. n_appearances and denominator are metric-specific.",
+      "columns": [
+        {
+          "name": "surface_group",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "metric",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_appearances",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_possible_appearances",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "numerator",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "denominator",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "rate",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        }
+      ]
+    },
+    "missingness_by_season": {
+      "file": "missingness_by_season.csv",
+      "population_and_definition": "All retained matches; missing values after cleaning, long form by season and original source field.",
+      "columns": [
+        {
+          "name": "season",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "field",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_rows",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "n_missing",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "missing_rate",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        }
+      ]
+    },
+    "numeric_summary": {
+      "file": "numeric_summary.csv",
+      "population_and_definition": "All retained records, numeric descriptive statistics; ranks/ages count winner and loser columns separately. Durations here include unfinished matches; use duration tables for completed-only comparison.",
+      "columns": [
+        {
+          "name": "field",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "count",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "mean",
+          "dtype": "number",
+          "unit": "see table description",
+          "nullable": true
+        },
+        {
+          "name": "std",
+          "dtype": "number",
+          "unit": "see table description",
+          "nullable": true
+        },
+        {
+          "name": "min",
+          "dtype": "number",
+          "unit": "see table description",
+          "nullable": true
+        },
+        {
+          "name": "p25",
+          "dtype": "number",
+          "unit": "see table description",
+          "nullable": true
+        },
+        {
+          "name": "median",
+          "dtype": "number",
+          "unit": "see table description",
+          "nullable": true
+        },
+        {
+          "name": "p75",
+          "dtype": "number",
+          "unit": "see table description",
+          "nullable": true
+        },
+        {
+          "name": "p95",
+          "dtype": "number",
+          "unit": "see table description",
+          "nullable": true
+        },
+        {
+          "name": "max",
+          "dtype": "number",
+          "unit": "see table description",
+          "nullable": true
+        }
+      ]
+    },
+    "score_status": {
+      "file": "score_status.csv",
+      "population_and_definition": "All retained records grouped by parsed score status; completed means recognized score syntax without RET W/O DEF ABN markers.",
+      "columns": [
+        {
+          "name": "score_status",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "n_matches",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "share",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        }
+      ]
+    },
+    "quality_by_field": {
+      "file": "quality_by_field.csv",
+      "population_and_definition": "Raw versus retained cleaned missingness. Denominators differ because of scope filtering; these rates alone do not isolate the effect of cleaning.",
+      "columns": [
+        {
+          "name": "field",
+          "dtype": "string",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "raw_n_rows",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "raw_missing",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "raw_missing_rate",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        },
+        {
+          "name": "clean_n_rows",
+          "dtype": "integer",
+          "unit": "see table description",
+          "nullable": false
+        },
+        {
+          "name": "clean_missing",
+          "dtype": "integer",
+          "unit": "count",
+          "nullable": false
+        },
+        {
+          "name": "clean_missing_rate",
+          "dtype": "number",
+          "unit": "proportion",
+          "nullable": true
+        }
+      ]
+    }
+  }
+}

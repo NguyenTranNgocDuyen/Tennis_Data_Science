@@ -1,0 +1,67 @@
+{
+  "data": [
+    {
+      "id": 91003,
+      "matchId": 91003,
+      "player1Id": 1003,
+      "player2Id": 1004,
+      "tournamentId": 20001,
+      "roundId": 10,
+      "date": "2026-10-28T14:00:00Z",
+      "result": "6-4 1-0",
+      "result_type": "retired",
+      "match_winner": 1003,
+      "best_of": 3,
+      "player1": {
+        "id": 1003,
+        "name": "Demo Player 1003",
+        "countryAcr": "AAA"
+      },
+      "player2": {
+        "id": 1004,
+        "name": "Demo Player 1004",
+        "countryAcr": "BBB"
+      },
+      "tournament": {
+        "id": 20001,
+        "name": "Demo Tour",
+        "date": "2026-10-26T00:00:00Z",
+        "rankId": 2,
+        "courtId": 1
+      }
+    },
+    {
+      "id": 91005,
+      "matchId": 91005,
+      "player1Id": 1005,
+      "player2Id": 1006,
+      "tournamentId": 20002,
+      "roundId": 9,
+      "date": "2026-10-28T14:00:00Z",
+      "result": "6-3 6-4",
+      "result_type": "completed",
+      "match_winner": 1005,
+      "best_of": null,
+      "player1": {
+        "id": 1005,
+        "name": "Demo Player 1005",
+        "countryAcr": "AAA"
+      },
+      "player2": {
+        "id": 1006,
+        "name": "Demo Player 1006",
+        "countryAcr": "BBB"
+      },
+      "tournament": {
+        "id": 20002,
+        "name": "Demo Masters",
+        "date": "2026-10-26T00:00:00Z",
+        "rankId": 3,
+        "courtId": 1
+      }
+    }
+  ],
+  "pageNo": 2,
+  "pageSize": 500,
+  "hasNextPage": false
+}

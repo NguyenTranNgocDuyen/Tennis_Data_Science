@@ -1,0 +1,9 @@
+{
+  "seed": 42,
+  "rows": 127,
+  "base_rows": 125,
+  "intentional_exact_duplicates": 2,
+  "artificial_value_errors": false,
+  "description": "Real rows with original source_file/source_row, plus copies of first two rows. Not part of full analysis.",
+  "source_commit": "83733587353df8a41f2fd4f516147d5aa83f5a8d"
+}
