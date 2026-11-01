@@ -109,7 +109,7 @@
       "sha256": "d128251e9a3725f694c97a6761df96610481f92a6a69ab936174acb0c4be0589",
       "bytes": 913,
       "rows": null,
-      "downloaded_at_utc": "2026-10-28T08:46:39.521810+00:00"
+      "downloaded_at_utc": "2026-11-01T05:38:50.119026+00:00"
     },
     {
       "path": "data/provenance/UPSTREAM_README.md",
@@ -117,7 +117,7 @@
       "sha256": "80fd5a50ba020fd306890d31142187bb737627ba468d3e36faabe92d48ab5083",
       "bytes": 4673,
       "rows": null,
-      "downloaded_at_utc": "2026-10-28T08:46:39.907836+00:00"
+      "downloaded_at_utc": "2026-11-01T05:38:50.527358+00:00"
     },
     {
       "path": "data/provenance/matches_data_dictionary.txt",
@@ -125,7 +125,7 @@
       "sha256": "b4b525ad8163f9ee2ffde3ab7108924ec1385ef7d2fddf828c1fc096fcaafee4",
       "bytes": 3758,
       "rows": null,
-      "downloaded_at_utc": "2026-10-28T08:46:40.225833+00:00"
+      "downloaded_at_utc": "2026-11-01T05:38:50.936338+00:00"
     }
   ]
 }

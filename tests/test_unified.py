@@ -151,7 +151,8 @@ def test_incremental_common_load_insert_update_idempotency_and_overlap(tmp_path,
     for name in ['project.json','unified.json','tennis_format_rules.json']:
         (tmp_path/'config'/name).write_text((ROOT/'config'/name).read_text())
     (tmp_path/'config/tournament_aliases.json').write_text(json.dumps(aliases()))
-    for name in ['tennis_schema.json','tennis_common_schema.json']:(tmp_path/'data/schemas'/name).write_text((ROOT/'data/schemas'/name).read_text())
+    for name in ['tennis_schema.json','tennis_common_schema.json']:
+        (tmp_path/'data/schemas'/name).write_text((ROOT/'data/schemas'/name).read_text(encoding='utf-8'), encoding='utf-8')
     for name in ['player_overrides.csv','edition_overrides.csv']:(tmp_path/'data/mappings'/name).write_text((ROOT/'data/mappings'/name).read_text())
     (tmp_path/'data/reference/github_players_manifest.json').write_text(json.dumps({'sha256':'fixture'}))
     (tmp_path/'data/reference/api_editions.json').write_text(json.dumps({'20001':{'draw_size':32,'raw_path':'fixture'}}))

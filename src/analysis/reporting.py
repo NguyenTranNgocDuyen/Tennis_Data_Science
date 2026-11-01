@@ -231,4 +231,4 @@ def write_table_contract(path: Path, tables: dict):
             nullable=(dtype=='number' or c in {'score','minutes'})
             fields.append({'name':c,'dtype':dtype,'unit':unit,'nullable':nullable})
         contract['tables'][name]={'file':name+'.csv','population_and_definition':TABLE_NOTES[name],'columns':fields}
-    path.write_text(json.dumps(contract,ensure_ascii=False,indent=2)+'\n')
+    path.write_text(json.dumps(contract,ensure_ascii=False,indent=2)+'\n', encoding='utf-8')

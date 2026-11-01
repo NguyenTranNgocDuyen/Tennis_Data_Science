@@ -1,4 +1,4 @@
-# Đồ án khoa học dữ liệu tennis phần A và B
+# Đồ án khoa học dữ liệu tennis
 
 **Tài liệu bàn giao trực quan hoá:** [nguồn dữ liệu, flow pipeline, ngoại lệ/alert và biểu đồ ưu tiên](docs/data_pipeline_visualization.md) · [sơ đồ SVG](docs/figures/pipeline_flow.svg).
 
@@ -28,8 +28,9 @@ Dự án triển khai thu thập, kiểm định, làm sạch, tạo đặc trư
 - [Notebook EDA đã chạy](notebooks/member_b_eda.ipynb): tái tính, đối chiếu bảng và các hình khám phá.
 - [Hợp đồng bàn giao cho C](docs/data_contract.md): giao diện hàm, ý nghĩa đặc trưng và 14 bảng kết quả.
 - [Bằng chứng nghiệm thu](reports/acceptance.md): các kiểm thử và kiểm tra tái lập đã thực hiện.
+- [Kế hoạch C](docs/visualization_plan.md), [notebook C](notebooks/member_c_visualization.ipynb), [insight C](reports/insights.md), [báo cáo tổng hợp](reports/final_report.md) và [nghiệm thu Windows](reports/final_acceptance.md).
 
-Thư mục này chứa đầy đủ công việc A B. Thành viên C có thể bắt đầu từ `reports/tables/` mà không cần chạy thu thập. Không cần tài khoản Kaggle, token hay API trả phí. Không bao gồm mô hình dự đoán vì tài liệu không yêu cầu trong A B.
+Phần C dùng các bảng historical tại `reports/tables/`, không gộp với API/unified snapshot. Chạy `python scripts/export_visualizations.py` để xuất PNG/SVG vào `reports/figures/`. Không cần token hay API trả phí cho A/B/C historical.
 
 ## Cài đặt và chạy lại
 
@@ -99,4 +100,4 @@ tests/                             Kiểm thử schema, làm sạch, thống kê
 
 Dữ liệu do **Jeff Sackmann / Tennis Abstract** biên soạn. [Kho gốc](https://github.com/JeffSackmann/tennis_atp), [bản lưu trữ](https://github.com/Aneeshers/tennis-sackmann-archive/tree/83733587353df8a41f2fd4f516147d5aa83f5a8d), commit `83733587353df8a41f2fd4f516147d5aa83f5a8d`, truy cập 2026-10-28. Dữ liệu và dữ liệu phái sinh được sử dụng/chia sẻ theo [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/): ghi công, phi thương mại, chia sẻ cùng điều kiện; đã lọc và làm sạch như báo cáo mô tả. Không tuyên bố đây là dữ liệu chính thức đã xác minh bởi ATP.
 
-`.gitignore` bỏ qua raw/interim/processed và môi trường ảo để không commit dữ liệu lớn; mẫu và manifest được giữ. Các file dữ liệu vẫn hiện diện trên máy này và trong gói bàn giao để chạy offline. Dự án chưa được đẩy GitHub hay tạo PR; không cần các thao tác đó để sử dụng sản phẩm A B.
+`.gitignore` bỏ qua raw/interim/processed và môi trường ảo để không commit dữ liệu lớn; mẫu và manifest được giữ. Trạng thái push/PR phải được xác minh trên GitHub; có remote `origin` không đủ để kết luận. Tài liệu `launchd` là bằng chứng macOS lịch sử, không khẳng định scheduler đang chạy trên Windows.
