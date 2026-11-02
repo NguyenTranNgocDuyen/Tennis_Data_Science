@@ -4,7 +4,7 @@ Hai nguồn hiện được nạp vào cùng một bộ dữ liệu phân tích 
 
 Điểm đọc chính cho B và C từ đây là **runs/unified/CURRENT.json**, không nối trực tiếp hai CSV nguồn. Dữ liệu GitHub và API riêng vẫn được giữ để kiểm tra, phục hồi và đối chiếu.
 
-## Lịch đang sử dụng
+## Cấu hình lịch được nghiệm thu gần nhất
 
 | Lịch theo giờ Việt Nam | Tác vụ |
 | --- | --- |
@@ -14,7 +14,7 @@ Hai nguồn hiện được nạp vào cùng một bộ dữ liệu phân tích 
 
 Job tuần `vn.khdl.tennis.weekly` đã đổi sang `run_unified_load.py --collect --refresh-reference`. Đây là một chuỗi tuần tự trong cùng job; không dựa vào khoảng cách giờ giữa hai job riêng. Nếu bước đối soát API thất bại, bước nạp chung dừng và snapshot đã công bố trước đó được giữ.
 
-Máy phải hoạt động và phiên đăng nhập phải sẵn sàng để launchd thực thi. Lịch local không phải dịch vụ server chạy độc lập với máy cá nhân.
+Ba lịch trên được báo cáo đã cài bằng `launchd` trên máy macOS ngày 29/10/2026. Chưa xác minh chúng còn hoạt động trên checkout Windows ngày 02/11/2026. Máy phải hoạt động và phiên đăng nhập phải sẵn sàng để `launchd` thực thi; lịch local không phải dịch vụ server chạy độc lập với máy cá nhân.
 
 ## Ý nghĩa thống nhất giữa hai nguồn
 

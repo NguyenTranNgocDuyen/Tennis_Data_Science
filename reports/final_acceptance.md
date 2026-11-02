@@ -1,25 +1,38 @@
-# Nghiệm thu cuối — phần C và môi trường Windows
+# Nghiệm thu cuối — phần C và trạng thái hiện tại
 
-Ngày chạy: 01/11/2026, múi giờ Asia/Ho_Chi_Minh. Môi trường: Windows 10.0.26200.0, Python 3.13.17, virtual environment `.venv`. Commit tại thời điểm kiểm tra: `da5412f` (các thay đổi phần C chưa commit).
+## Cập nhật ngày 02/11/2026
 
-| Kiểm tra                           | Kết quả thực tế                                                                                                                             |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Cài dependency                     | Pass: cài từ `requirements.txt` vào `.venv`                                                                                                 |
-| Full test suite                    | Pass: **158 passed** trong 14,86 giây; dùng `--basetemp .pytest-tmp -p no:cacheprovider` vì `%TEMP%` bị từ chối quyền trong sandbox Windows |
-| Test visualization                 | Đã nằm trong full suite; kiểm tra contract, proportion 0–1, immutability, headless, annotation và PNG/SVG export                            |
-| Export C                           | Pass: 6 PNG và 6 SVG ở `reports/figures/` từ historical hand-off tables                                                                     |
-| Notebook C                         | Pass: 3 code cells thực thi bằng kernel `tennis-khdl`; notebook không đọc `.env` hoặc gọi API                                               |
-| Pipeline sample                    | Pass: 127 input, bỏ 2 duplicate, giữ 125, 0 post-clean issue, 14 tables ở `runs/sample`                                                     |
-| Reproducibility historical offline | Pass: 26 artifacts khớp SHA-256, 11 raw files verified, mismatches: 0                                                                       |
+Môi trường: Windows, Python 3.14.3, virtual environment `.venv`. Nhánh local: `c`. Lần cập nhật này chạy pipeline historical offline và đối chiếu manifest; không chạy lại test suite.
 
-## Lệnh đã chạy
+| Kiểm tra | Kết quả lần này |
+| --- | --- |
+| Pipeline historical offline | Pass: 30.616 dòng nguồn, 3.042 ngoài phạm vi, 27.574 giữ lại, 0 lỗi sau xử lý, 14 bảng |
+| Tái lập SHA-256 | Pass: 11/11 raw input, 41/41 source/schema và 26/26 output artifact khớp manifest; 0 mismatch |
+| Cách xác minh | Chạy `run_pipeline.py --offline` vào output directory mới đã tạo sẵn trong workspace; so sánh input, source-code và output manifest |
+| Script `verify_reproducibility.py` | Chưa chạy trọn trong sandbox: Windows từ chối quyền tạo thư mục con trong temp. Phép chạy pipeline độc lập và so manifest nêu trên đã hoàn tất thành công |
+| Full test suite | Không chạy lại ngày 02/11. Báo cáo nghiệm thu 01/11 ghi 158 passed trên Python 3.13.17 |
+| Notebook/biểu đồ C | Có sẵn trong repo; không thực thi lại notebook hoặc export hình trong lần cập nhật này |
+
+Lệnh pipeline đã chạy:
 
 ```powershell
-.\.venv\Scripts\python -m pytest -q --basetemp .pytest-tmp -p no:cacheprovider
-.\.venv\Scripts\python scripts\export_visualizations.py
-.\.venv\Scripts\python scripts\run_pipeline.py --sample
+.\.venv\Scripts\python.exe scripts\run_pipeline.py --offline
 ```
 
-Notebook C được thực thi qua `nbclient` bằng kernel cục bộ `tennis-khdl` và output được lưu trong notebook. `scripts/verify_reproducibility.py` cũng đã được chạy nhưng không thể hoàn tất do artifact historical bị thiếu; không tải lại hoặc tạo dữ liệu thay thế.
+Kết quả checksum được lưu tại `reports/reproducibility.json`. Các phép so sánh dùng cùng raw cache ghim phiên bản và không gọi mạng/API.
 
-Các số 49/80/112/143 trong báo cáo cũ là mốc lịch sử của các cấu hình/dataset khác. Kết quả chuẩn cho working tree hiện tại, trong phạm vi artifact đang có, là **158 passed**. Scheduler `launchd` và trạng thái GitHub/PR không được xác minh trên Windows trong đợt này.
+## Bằng chứng nghiệm thu trước đó
+
+Ngày 01/11/2026, báo cáo trước ghi cài dependency, 158 test pass, export 6 PNG/6 SVG, thực thi notebook C và pipeline sample thành công. Đây là kết quả của môi trường Python 3.13.17 và không được xem là lần chạy test ngày 02/11.
+
+Các báo cáo cũ về 49/80/112/143 test thuộc các mốc và cấu hình trước đó. Dùng 158 pass làm kết quả test gần nhất đã được ghi nhận; lần rà soát hiện tại chỉ xác minh lại pipeline historical và checksum.
+
+## Trạng thái vận hành và Git
+
+- Báo cáo kích hoạt ghi nhận ba lịch `launchd` đã được cài trên máy macOS ngày 29/10/2026. Trạng thái chạy hiện thời chưa được xác minh trên checkout Windows này.
+- Nhánh `c` đã được tạo local. Working tree còn thay đổi chưa commit; chưa có xác nhận push hoặc pull request.
+- Dữ liệu API 2026 và lịch vận hành là phần mở rộng độc lập; không gộp vào kết quả historical của phần C.
+
+## Giới hạn diễn giải dữ liệu
+
+Thời lượng mùa 2015 có độ phủ thấp; các giá trị 987 và 1.146 phút vẫn được giữ với cờ review. Tỷ lệ và so sánh nhóm dùng mẫu số riêng theo từng metric. Phân tích mô tả không chứng minh quan hệ nhân quả. Dữ liệu API 2026 hiện chỉ phủ một khoảng ngày trong tháng 10, không phải trọn mùa.
