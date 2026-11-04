@@ -1,6 +1,6 @@
 # Thu thập tennis định kỳ bằng RapidAPI
 
-**Cập nhật luồng tuần:** job thứ Hai 07:40 hiện chạy `run_unified_load.py --collect --refresh-reference` để đối soát API và incremental load vào schema chung. Lịch lấy raw hằng ngày không đổi. B/C đọc `runs/unified/CURRENT.json`; xem [schema chung](unified_schema.md) thay vì tự nối hai CSV nguồn.
+**Cập nhật luồng tuần:** cấu hình được nghiệm thu gần nhất dùng job thứ Hai 07:40 chạy `run_unified_load.py --collect --refresh-reference` để đối soát API và incremental load vào schema chung. Lịch lấy raw hằng ngày không đổi. B/C đọc `runs/unified/CURRENT.json`; xem [schema chung](unified_schema.md) thay vì tự nối hai CSV nguồn. Đây là trạng thái cài đặt được ghi nhận trên macOS ngày 29/10/2026; chưa xác minh lịch còn hoạt động trên máy Windows hiện tại.
 
 Phiên bản mới bổ sung replay/resume từ raw, log theo operation và cảnh báo Telegram qua tin nhắn riêng từ bot tới cá nhân bạn. Đọc [hướng dẫn phục hồi và theo dõi](recovery_and_alerts.md). Lịch setup hiện tạo 3 job, gồm thêm flush outbox mỗi 10 phút; các mô tả hai lịch thu thập bên dưới vẫn áp dụng.
 

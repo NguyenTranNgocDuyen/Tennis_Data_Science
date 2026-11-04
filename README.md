@@ -6,7 +6,7 @@
 
 Dự án triển khai thu thập, kiểm định, làm sạch, tạo đặc trưng và phân tích thống kê theo tài liệu phân công. Dữ liệu thật là đơn nam cấp tour mùa 2015–2025, do Jeff Sackmann / Tennis Abstract biên soạn; sử dụng bản lưu trữ ghim phiên bản vì kho gốc trả về 404 khi triển khai. Đã kèm dữ liệu gốc, dữ liệu xử lý, báo cáo và notebook chạy có kết quả.
 
-Đã bổ sung **luồng API cập nhật định kỳ**: [hướng dẫn cấu hình RapidAPI và lịch chạy](docs/api_batch.md). Luồng này lưu SQLite, có quota, phân trang, cập nhật không trùng và xuất dữ liệu bằng B. Đã chạy API thật và kích hoạt lịch tự động ngày 29 tháng 10 năm 2026; dữ liệu và kết quả nghiệm thu ở [báo cáo kích hoạt](reports/live_activation.md). Credential đọc từ .env trên máy, không chia sẻ trong gói bàn giao.
+Đã bổ sung **luồng API cập nhật định kỳ**: [hướng dẫn cấu hình RapidAPI và lịch chạy](docs/api_batch.md). Luồng này lưu SQLite, có quota, phân trang, cập nhật không trùng và xuất dữ liệu bằng B. Báo cáo ghi nhận đã chạy API thật và cài lịch `launchd` trên máy macOS ngày 29 tháng 10 năm 2026; trạng thái lịch hiện thời chưa được xác minh trên checkout Windows này. Xem [báo cáo kích hoạt](reports/live_activation.md). Credential đọc từ `.env` cục bộ, không chia sẻ trong gói bàn giao.
 
 [Nghiệm thu phần API](reports/api_acceptance.md) ghi kết quả 80 kiểm thử, chạy lại demo và trạng thái lịch chạy. [Nghiệm thu A B ban đầu](reports/acceptance.md) là bằng chứng của phiên bản dữ liệu lịch sử ngày 28 tháng 10.
 
@@ -54,6 +54,25 @@ python3 -m venv .venv
 
 # Tái chạy vào thư mục tạm, đối chiếu byte toàn bộ đầu ra
 .venv/bin/python scripts/verify_reproducibility.py
+```
+
+### Windows PowerShell
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+
+# Dùng dữ liệu raw đã có, chạy hoàn toàn offline
+.\.venv\Scripts\python.exe scripts\run_pipeline.py --offline
+
+# Chạy bộ dữ liệu mẫu vào runs/sample
+.\.venv\Scripts\python.exe scripts\run_pipeline.py --sample
+
+# Chạy test; basetemp trong project tránh một số cấu hình Windows chặn %TEMP%
+.\.venv\Scripts\python.exe -m pytest -q --basetemp .pytest-tmp -p no:cacheprovider
+
+# Xác minh tái lập
+.\.venv\Scripts\python.exe scripts\verify_reproducibility.py
 ```
 
 Tùy chọn `--output-dir /path/to/output` ghi kết quả vào thư mục khác để đối chiếu tái lập. Nếu cache raw bị sửa, pipeline dừng vì SHA256 không khớp; khôi phục đúng file nguồn từ URL trong manifest. Không sửa manifest để hợp thức hóa file đã bị thay đổi. Muốn thay snapshot hoặc mùa, tạo bản dự án riêng để giữ phiên bản này tái lập được.

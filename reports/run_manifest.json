@@ -20,7 +20,7 @@
     ],
     "sample_seed": 42
   },
-  "python": "3.13.17",
+  "python": "3.14.3",
   "packages": {
     "pandas": "3.1.0",
     "numpy": "2.5.4",
@@ -62,7 +62,7 @@
     "scripts\\build_notebook.py": "9a8236ef435bd83a6266b9d7f8739ce251fb2e032c42c393927b558a6d4b84ea",
     "scripts\\create_schema.py": "14f9302e56e68781dec38130aa512dd213e35ff0489e6f14da541bfc9f59a216",
     "scripts\\execute_notebook.py": "23734ac53fe9c424c27aaf770459fbe3fcad1d05e7f80fc40d464c6cd718df04",
-    "scripts\\export_visualizations.py": "27461e1d65d4114cb95bc787dbd9949db542a204d2401afc064e8de41f531c6c",
+    "scripts\\export_visualizations.py": "ab51026677b96447add08da08b15562da688d4e68d2deba3640c9e71a1ee7456",
     "scripts\\run_api_batch.py": "ee734e63de6261b0d647949c42343c8e793ad0b7095e5e91028131e023da967f",
     "scripts\\run_pipeline.py": "2b3e88cd6d89cd8e5f01c036fe48a862005b758f2dfb39ae6a70f47a2350406e",
     "scripts\\run_unified_load.py": "e2f17eae889781331d73e2b883a22112d248d21302f28bc60e39d665757707c0",
@@ -94,11 +94,11 @@
     "src\\preprocessing\\common_semantics.py": "0a8ef09983e31831fc0005ba72bd6905b18a268ab050cead490ae40582331aab",
     "src\\preprocessing\\rapidapi_adapter.py": "6c938db1d9e94b6434bbe5a4838e531f05c6476266f10c207fa34b7fe3608b99",
     "src\\preprocessing\\unified.py": "e84ab82a6757b7acabd6a9d56cd71418bd8c55eb2f75cb19f418bf90d39dd4bc",
-    "src\\visualization\\__init__.py": "98053914cc6760a8ee63eadc26d759a4dd268caf2b61c6b365424e0e357b4af2",
-    "src\\visualization\\contracts.py": "7ca7bfd9d1a2c29a07893e32dd87efc35c513cc248586a70dc91035effa193ed",
-    "src\\visualization\\export.py": "5ef1504b320d91a6ebcd6a68719ec2187c9dea1354bf183862fc8114fe9e4098",
-    "src\\visualization\\figures.py": "bd397c5a600adbdf5e3e196d9b12ef22b01ec7e5073a2c7fb2341a827666f71a",
-    "src\\visualization\\formatting.py": "a2767c8f9927d6458e710a5030ca274575fb1a40b188488d98b85152aeab7116"
+    "src\\visualization\\__init__.py": "881168abf114821be5fceca503378357b9b9d41aac5b82668bd144dd015a7b07",
+    "src\\visualization\\contracts.py": "1ce7db2cf41f910ea3f63f0635bd29c446d55fb0fb74639428ca4161cdb896b5",
+    "src\\visualization\\export.py": "3906d7e7c67097cc2b671386f8e74940f793a33425e4c5cbc17a75b132c53d41",
+    "src\\visualization\\figures.py": "7784a8d815964c61953e0c08c1ffeb85145e9f5005ea7d510ba5ad47d97cb0d7",
+    "src\\visualization\\formatting.py": "dd0863f33eb09a0dfd676b81d652c4c017d37738af558162cae9d0c3033c4548"
   },
   "outputs_sha256": {
     "data\\interim\\cleaning_actions.csv": "ed898b14d1ae8c430da1d7c73d96dfcf068a0b2bf9f59127e02ce0165acdb64d",
