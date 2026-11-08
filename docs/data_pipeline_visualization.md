@@ -53,8 +53,8 @@ Quyền sử dụng dữ liệu API theo nhà cung cấp; không tự gán giấ
 | `data/processed/` | CSV đã xử lý **chỉ nhánh GitHub** | Có, cho lịch sử 2015–2025 |
 | `data/reference/`, `data/mappings/` | Tham chiếu tự động và override có lý do | Dùng để đối chiếu định danh |
 | `data/unified/tennis.sqlite3` | Kho chung, contributions, crosswalk, xung đột, lịch sử load | Có qua SQL trích JSON; chưa có view phẳng chuyên cho BI |
-| `runs/unified/CURRENT.json` | Con trỏ tới snapshot chung được công bố | **Điểm bắt đầu khuyến nghị cho C** |
-| `runs/unified/<snapshot>/` | CSV phẳng, 14 bảng, coverage, provenance, manifest | **Đầu vào trực quan hoá chính** |
+| `runs/unified/CURRENT.json` | Con trỏ tới snapshot chung được công bố; không có sẵn trong checkout sạch | Tùy chọn cho luồng phân tích unified; cần tạo trước theo [hướng dẫn schema chung](unified_schema.md) và đáp ứng các điều kiện nguồn tại đó |
+| `runs/unified/<snapshot>/` | CSV phẳng, 14 bảng, coverage, provenance, manifest | Đầu vào cho trực quan hóa từ snapshot unified. Luồng C historical hiện tại dùng các bảng trong `reports/tables/` và không cần snapshot unified hoặc API. |
 | `data/monitoring/alerts.sqlite3` | Hàng đợi và lịch sử gửi Telegram | Chỉ cho vận hành |
 | `logs/` | Log toàn pipeline, từng run và output launchd | Chỉ cho vận hành/truy lỗi |
 

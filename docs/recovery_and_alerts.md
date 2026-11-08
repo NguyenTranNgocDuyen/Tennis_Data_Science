@@ -122,7 +122,7 @@ Cơ chế gửi là best effort với retry bền vững, không bảo đảm ex
 
 ## Lịch chạy và trạng thái triển khai
 
-setup_api_schedule.py tạo thêm job `vn.khdl.tennis.alerts` chạy flush mỗi 10 phút để không phải chờ tới batch ngày hôm sau. Hai lịch thu thập/đối soát vẫn giữ nguyên. Cả ba lịch đã được cài sau khi xác minh credential và chạy batch thật. Trạng thái launchd được ghi ở reports/live_activation.md.
+Tại lần nghiệm thu trên macOS ngày 29/10/2026, `setup_api_schedule.py` đã tạo job `vn.khdl.tennis.alerts` chạy flush mỗi 10 phút; hai lịch thu thập/đối soát cũng được ghi nhận đã cài sau khi xác minh credential và chạy batch thật. Đây là trạng thái lịch sử tại thời điểm đó, không chứng minh các lịch còn hoạt động hiện nay. Trạng thái hiện tại chưa được xác minh trên checkout Windows; xem [biên bản kích hoạt](../reports/live_activation.md).
 
 ```bash
 # Tạo lại 3 plist để xem, chưa bật lịch

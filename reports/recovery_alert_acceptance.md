@@ -1,6 +1,6 @@
 # Nghiệm thu phục hồi raw log và cảnh báo Telegram
 
-Ngày 29 tháng 10 năm 2026. Người dùng chọn nhóm Telegram, token/chat ID cấu hình sau; chấp nhận P1/P2 thử gửi ngay, gộp lặp 30 phút và P3/P4 tổng kết theo lần chạy.
+Mốc nghiệm thu phục hồi/cảnh báo ngày 29 tháng 10 năm 2026, trước lần kích hoạt được ghi nhận trong [live_activation.md](live_activation.md). Tại mốc này các lịch chỉ được tạo, chưa kích hoạt và Telegram chưa được kiểm thử bằng credential thật. Trạng thái hiện tại trên checkout Windows chưa được xác minh. Người dùng chọn nhóm Telegram, token/chat ID cấu hình sau; chấp nhận P1/P2 thử gửi ngay, gộp lặp 30 phút và P3/P4 tổng kết theo lần chạy.
 
 | Hạng mục | Kết quả kiểm chứng |
 | --- | --- |

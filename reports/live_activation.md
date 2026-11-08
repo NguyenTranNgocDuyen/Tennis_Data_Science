@@ -1,6 +1,6 @@
 # Kích hoạt flow dữ liệu thật và lịch tự động
 
-Đã kích hoạt ngày 29 tháng 10 năm 2026, timezone máy +07. API đã xác thực, bot Telegram gửi cá nhân đã nhận xác nhận gửi; cả ba LaunchAgent đã được nạp. User cần giữ máy hoạt động và phiên đăng nhập có sẵn để lịch local chạy.
+Biên bản này ghi nhận lần kích hoạt ngày 29 tháng 10 năm 2026 trên macOS, timezone máy +07: API đã xác thực, bot Telegram gửi cá nhân nhận xác nhận gửi và cả ba LaunchAgent đã được nạp. Đây là trạng thái tại thời điểm nghiệm thu, không xác nhận các job còn hoạt động hiện nay hoặc trên checkout Windows. Các báo cáo api_acceptance.md và recovery_alert_acceptance.md ghi lại các mốc trung gian trước kích hoạt.
 
 | Hạng mục | Kết quả |
 | --- | --- |
@@ -17,7 +17,7 @@
 | Telegram | Summary của lượt export qua launchd được xác nhận sent |
 | Pipeline lịch sử | Vẫn 27.574 trận; 26 artifact tái lập khớp SHA256 |
 
-## Lịch đang hoạt động
+## Lịch được ghi nhận đã nạp tại thời điểm kích hoạt
 
 | Job | Lịch giờ Việt Nam | Công việc |
 | --- | --- | --- |
@@ -25,11 +25,11 @@
 | vn.khdl.tennis.weekly | Thứ Hai 07:40 | Đối soát 30 ngày, chia sẻ ngân sách ngày |
 | vn.khdl.tennis.alerts | Mỗi 10 phút | Retry Telegram, gửi digest đã đến hạn, không gọi Tennis API |
 
-Các job hiện có thể ở trạng thái not running giữa hai lượt; loaded là đã được hệ điều hành lập lịch, không phải tác vụ cần chạy liên tục. Lượt thu thập tiếp theo dự kiến 07:10 ngày 30 tháng 10 năm 2026 khi máy có thể thực thi lịch.
+Các job có thể ở trạng thái not running giữa hai lượt; loaded là đã được hệ điều hành lập lịch, không phải tác vụ cần chạy liên tục. Tại thời điểm nghiệm thu, lượt thu thập tiếp theo dự kiến 07:10 ngày 30 tháng 10 năm 2026 khi máy có thể thực thi lịch. Không dùng mốc dự kiến này để suy ra lịch đã chạy sau ngày nghiệm thu.
 
 ## Dữ liệu hiện tại
 
-CURRENT: runs/api/CURRENT.json.
+Tại thời điểm nghiệm thu, CURRENT trỏ tới `runs/api/CURRENT.json`. Đây là đầu ra runtime bị Git bỏ qua và không có trong checkout sạch hiện tại.
 
 Snapshot được nghiệm thu: `snapshots/20261029T041250-774d66e0`.
 
