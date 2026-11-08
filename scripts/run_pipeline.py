@@ -19,10 +19,9 @@ from src.preprocessing import clean_matches, player_matches
 from src.analysis import build_tables
 from src.analysis.reporting import write_reports, write_table_contract
 from src.observability import Observer
-from src.observability.runtime import load_env
 
 
-def make_sample(raw, result, config):
+def make_sample(raw, result, config, output_dir: Path):
     """Real source rows only; add two labeled exact duplicates for development."""
     retained = set(zip(result.matches.source_file,result.matches.source_row.astype('string')))
     valid = raw.loc[[tuple(r) in retained for r in raw[['source_file','source_row']].itertuples(index=False,name=None)]]
@@ -32,18 +31,33 @@ def make_sample(raw, result, config):
                           valid.loc[valid.winner_rank.isna() | valid.loser_rank.isna()].head(5),
                           valid.sample(n=min(80,len(valid)),random_state=config['sample_seed'])]).drop_duplicates(['source_file','source_row'])
     sample = pd.concat([selected,selected.head(2)],ignore_index=True)
-    sample.to_csv(ROOT/'data/sample/tennis_sample.csv',index=False)
+    sample_dir = output_dir/'data/sample'
+    sample_dir.mkdir(parents=True,exist_ok=True)
+    sample.to_csv(sample_dir/'tennis_sample.csv',index=False)
     meta = {'seed':config['sample_seed'],'rows':len(sample),'base_rows':len(selected),
             'intentional_exact_duplicates':2,'artificial_value_errors':False,
             'description':'Real rows with original source_file/source_row, plus copies of first two rows. Not part of full analysis.',
             'source_commit':config['source_commit']}
-    (ROOT/'data/sample/sample_manifest.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2)+'\n')
+    (sample_dir/'sample_manifest.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2)+'\n')
 
 
-def run(sample=False, offline=False, output: Path | None=None, observer=None):
+def prepare_output(output: Path) -> Path:
+    out=output.resolve()
+    if out == ROOT.resolve():
+        raise ValueError('The repository root cannot be used as --output-dir')
+    if out.exists() and any(out.iterdir()):
+        raise FileExistsError(f'Output directory must be empty: {out}')
+    out.mkdir(parents=True,exist_ok=True)
+    return out
+
+
+def run(sample=False, offline=False, output: Path | None=None, observer=None, generate_sample=False,
+        output_prepared=False):
+    if output is None:
+        raise ValueError('An explicit --output-dir is required to prevent writes into the repository root')
+    out = output.resolve() if output_prepared else prepare_output(output)
     config = json.loads((ROOT/'config/project.json').read_text())
     schema = load_schema(ROOT/'data/schemas/tennis_schema.json')
-    out = output.resolve() if output else (ROOT/'runs/sample' if sample else ROOT)
     manifest = None
     if observer: observer.start_task('historical_collection')
     if sample:
@@ -91,8 +105,11 @@ def run(sample=False, offline=False, output: Path | None=None, observer=None):
                                       sorted([*ROOT.glob('src/**/*.py'),*ROOT.glob('scripts/*.py'),ROOT/'data/schemas/tennis_schema.json'])},
                 'outputs_sha256':{str(f.relative_to(out)):hashlib.sha256(f.read_bytes()).hexdigest() for f in files}}
     (out/'reports/run_manifest.json').write_text(json.dumps(run_info,ensure_ascii=False,indent=2)+'\n')
-    if not sample:
-        make_sample(raw,result,config)
+    if generate_sample:
+        make_sample(raw,result,config,out)
+        files.extend(sorted((out/'data/sample').glob('*')))
+        run_info['outputs_sha256'] = {str(f.relative_to(out)):hashlib.sha256(f.read_bytes()).hexdigest() for f in files}
+        (out/'reports/run_manifest.json').write_text(json.dumps(run_info,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(result.flow,indent=2))
     print(f'Post-clean validation: {len(post)} issues; tables: {len(tables)}; output: {out}')
     if observer: observer.end_task('artifact_export')
@@ -103,12 +120,22 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--offline',action='store_true',help='Require and verify cached source files; never download')
     parser.add_argument('--sample',action='store_true',help='Run development sample into runs/sample, leaving real outputs intact')
-    parser.add_argument('--output-dir',type=Path,help='Alternative output directory, useful for reproducibility checks')
+    parser.add_argument('--output-dir',type=Path,help='Required new or empty directory for all pipeline artifacts and logs')
+    parser.add_argument('--generate-sample',action='store_true',help='Also generate a sample under <output-dir>/data/sample; never writes to the repository sample directory')
     args=parser.parse_args()
-    load_env(ROOT/'.env')
-    observer=Observer(ROOT,'historical_pipeline','demo' if args.sample else 'live')
+    if args.output_dir is None:
+        parser.error('--output-dir is required; choose a new or empty directory outside existing project outputs')
+    if args.sample and args.generate_sample:
+        parser.error('--sample and --generate-sample cannot be used together')
     try:
-        result,tables=run(args.sample,args.offline,args.output_dir,observer)
+        output_dir=prepare_output(args.output_dir)
+    except (FileExistsError,ValueError) as exc:
+        parser.error(str(exc))
+    observer_root=output_dir
+    observer=Observer(observer_root,'historical_pipeline','demo' if args.sample or args.offline else 'live',
+                      config=json.loads((ROOT/'config/observability.json').read_text()))
+    try:
+        result,tables=run(args.sample,args.offline,output_dir,observer,args.generate_sample,output_prepared=True)
         observer.finish({'flow':result.flow,'n_tables':len(tables)})
     except BaseException as exc:
         observer.finish(error=exc)

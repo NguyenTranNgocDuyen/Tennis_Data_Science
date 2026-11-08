@@ -1,6 +1,6 @@
 # Nghiệm thu luồng thu thập API định kỳ
 
-Ngày kiểm tra 29 tháng 10 năm 2026, macOS ARM64, Python 3.13.7. Luồng mới dùng Tennis API – ATP WTA ITF qua RapidAPI. Chưa có API key nên chưa xác minh response có xác thực trên dịch vụ thật. Người dùng đã chọn hoàn thiện code và hướng dẫn trước.
+Mốc nghiệm thu trung gian ngày 29 tháng 10 năm 2026, macOS ARM64, Python 3.13.7. Luồng mới dùng Tennis API – ATP WTA ITF qua RapidAPI. Tại mốc này chưa có API key nên chưa xác minh response có xác thực trên dịch vụ thật. Báo cáo này ghi trạng thái trước lần kích hoạt được mô tả sau đó trong [live_activation.md](live_activation.md); trạng thái hiện tại trên checkout Windows chưa được xác minh. Người dùng đã chọn hoàn thiện code và hướng dẫn trước.
 
 | Kiểm tra | Kết quả |
 | --- | --- |
@@ -33,8 +33,8 @@ Ngày kiểm tra 29 tháng 10 năm 2026, macOS ARM64, Python 3.13.7. Luồng m�
 - tests/test_api_batch.py và tests/fixtures/rapidapi/: kiểm thử cùng fixture nhân tạo có nhãn.
 - docs/api_batch.md: hướng dẫn key, chạy thử, đọc đầu ra và vận hành.
 
-## Phần cần làm sau khi có key
+## Các bước dự kiến tại mốc nghiệm thu trước kích hoạt
 
-Điền key trong .env trên máy, đăng ký đúng gói FREE của sản phẩm, rồi chạy một ngày để xác minh endpoint và độ đầy đủ của response. --check chỉ xác nhận key có mặt, không xác nhận key đúng. Khi batch thật chạy đạt, bật lịch bằng setup_api_schedule.py --install.
+Tại thời điểm ghi báo cáo này, dự kiến điền key trong `.env`, xác minh endpoint và sau đó mới bật lịch. Trạng thái này đã được cập nhật bởi biên bản kích hoạt sau đó trong [live_activation.md](live_activation.md), nơi ghi nhận một lần gọi API thật và lịch đã được nạp trên macOS ngày 29/10/2026. Biên bản này không xác nhận trạng thái hiện nay trên checkout Windows.
 
 Demo không phải dữ liệu tennis thật và không được dùng làm kết luận. Snapshot API hiện để thiếu rank trước giải và thời lượng; các chỉ số tương ứng chưa có mẫu số để phân tích. Không tự nối dữ liệu API và Sackmann khi chưa có bảng ánh xạ định danh. Chi tiết giới hạn và phạm vi sử dụng dữ liệu ở docs/api_batch.md.

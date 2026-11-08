@@ -33,6 +33,30 @@ def render():
     return jobs
 
 
+def uninstall(target_root=None, run_command=None):
+    target_root=Path(target_root) if target_root is not None else Path.home()/'Library/LaunchAgents'
+    run_command=run_command or subprocess.run
+    for label in ['vn.khdl.tennis.daily','vn.khdl.tennis.weekly','vn.khdl.tennis.alerts']:
+        target=target_root/f'{label}.plist'
+        if not target.exists():
+            continue
+        try:
+            payload=plistlib.loads(target.read_bytes())
+        except (OSError,plistlib.InvalidFileException,ValueError):
+            print(f'Refusing to remove {target}: plist cannot be verified as project-owned.',file=sys.stderr)
+            continue
+        owner=payload.get('WorkingDirectory')
+        try:
+            owned=payload.get('Label')==label and owner is not None and Path(owner).resolve()==ROOT.resolve()
+        except (OSError,RuntimeError):
+            owned=False
+        if not owned:
+            print(f'Refusing to remove {target}: ownership metadata does not match this project.',file=sys.stderr)
+            continue
+        run_command(['launchctl','bootout',f'gui/{os.getuid()}/{label}'],capture_output=True)
+        target.unlink()
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--install',action='store_true',help='Install generated jobs for this macOS user, after key presence check')
@@ -43,10 +67,7 @@ def main():
     if args.uninstall:
         if sys.platform!='darwin':
             raise RuntimeError('launchd requires macOS')
-        for label in ['vn.khdl.tennis.daily','vn.khdl.tennis.weekly','vn.khdl.tennis.alerts']:
-            target=Path.home()/'Library/LaunchAgents'/f'{label}.plist'
-            subprocess.run(['launchctl','bootout',f'gui/{os.getuid()}/{label}'],capture_output=True)
-            target.unlink(missing_ok=True)
+        uninstall()
         print('Project schedules disabled; data retained.')
         return
     jobs=render()

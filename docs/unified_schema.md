@@ -1,8 +1,28 @@
 # Schema chung và nạp tăng dần hằng tuần
 
-Hai nguồn hiện được nạp vào cùng một bộ dữ liệu phân tích có định danh và ý nghĩa thống nhất. Bản khởi tạo có **27.644 trận** gồm 27.574 trận GitHub và 70 trận API, kèm 14 bảng của B. Schema chung phiên bản 2.0.0 giữ đủ 52 cột đầu vào và 77 cột sau xử lý; không làm thay đổi các file raw nguồn.
+Biên bản nghiệm thu ngày 29/10/2026 ghi nhận lần nạp đầu có **27.644 trận** gồm 27.574 trận GitHub và 70 trận API, kèm 14 bảng của B. Schema chung phiên bản 2.0.0 giữ đủ 52 cột đầu vào và 77 cột sau xử lý; không làm thay đổi các file raw nguồn. Đây là kết quả của lần nghiệm thu đó, không có nghĩa snapshot hoặc API database được đóng gói trong repository.
 
-Điểm đọc chính cho B và C từ đây là **runs/unified/CURRENT.json**, không nối trực tiếp hai CSV nguồn. Dữ liệu GitHub và API riêng vẫn được giữ để kiểm tra, phục hồi và đối chiếu.
+Snapshot `runs/unified/CURRENT.json` là đầu ra runtime; `runs/`, `data/api/` và `data/unified/` bị Git bỏ qua và không có trong checkout sạch. Vì vậy B/C chỉ đọc đường dẫn này sau khi snapshot được tạo tại máy đang chạy. Phần C historical vẫn dùng các bảng có sẵn trong `reports/tables/` và không cần snapshot unified hoặc API.
+
+## Tạo lại snapshot từ checkout sạch
+
+Chạy các lệnh dưới đây trong macOS, Linux hoặc WSL2, không chạy Python Windows native: `scripts/run_unified_load.py` dùng `fcntl` để khóa database. Cần cài dependencies, có 11 tệp raw lịch sử cùng manifest/checksum trong `data/raw/`, và có quyền truy cập GitHub để tải tham chiếu người chơi ghim phiên bản trong lần khởi tạo đầu tiên. Nếu raw chưa có, tải và tạo dữ liệu lịch sử theo hướng dẫn trong README trước.
+
+Để tạo snapshot chung chỉ từ lịch sử, khi chưa có API database và không muốn gọi Tennis API:
+
+```bash
+python scripts/run_unified_load.py --refresh-reference
+```
+
+Lệnh này có thể tải tham chiếu người chơi từ GitHub. API database mới được khởi tạo rỗng nếu chưa tồn tại; kết quả khi đó chỉ gồm phần GitHub, không gồm 70 trận API trong biên bản 29/10. `--refresh-reference` gọi `refresh_draw_reference`. Hàm này có thể gửi request RapidAPI khi database API có trận cần tra metadata nhánh đấu, metadata chưa có trong cache và `RAPIDAPI_KEY` đã được nạp từ `.env`; request mới tiêu thụ quota. Database rỗng/không có trận cần tra cứu, cache đã có phản hồi phù hợp hoặc thiếu key sẽ không tạo request mạng mới cho việc làm giàu metadata. Vì vậy cờ này không đồng nghĩa với việc luôn gọi API, nhưng cũng không nên chạy khi mục tiêu là bảo đảm tuyệt đối không có request API nếu database/cache hiện có chưa được kiểm tra.
+
+Để lấy dữ liệu API mới và đưa vào snapshot, cần cấu hình `RAPIDAPI_KEY` cục bộ, kiểm tra quyền sử dụng gói API, rồi chủ động chạy:
+
+```bash
+python scripts/run_unified_load.py --collect --refresh-reference
+```
+
+Lệnh có `--collect` chạy đối soát dữ liệu API thật và có thể tiêu thụ quota; `--refresh-reference` trong cùng lệnh cũng có thể cần request bổ sung theo điều kiện nêu trên. Không chạy lệnh này nếu chỉ muốn tái tạo phần lịch sử. Sau khi chạy thành công, `runs/unified/CURRENT.json` trỏ tới snapshot được công bố mới nhất; các tệp runtime đó vẫn không được commit.
 
 ## Cấu hình lịch được nghiệm thu gần nhất
 
@@ -115,7 +135,7 @@ Trong match_provenance, default_field_source áp dụng cho các giá trị có 
 # Chỉ nạp từ dữ liệu đã lưu, không gọi Tennis API
 .venv/bin/python scripts/run_unified_load.py
 
-# Cho phép lấy metadata nhánh đấu còn thiếu trong quota
+# Có thể gửi request RapidAPI nếu có trận cần tra cứu và cache thiếu; có thể tiêu thụ quota
 .venv/bin/python scripts/run_unified_load.py --refresh-reference
 
 # Toàn chuỗi tuần: đối soát API rồi nạp chung

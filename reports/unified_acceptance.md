@@ -22,11 +22,13 @@ Bộ kiểm thử bao gồm trường hợp hai nguồn dùng ID số trùng cho
 
 ## Vận hành
 
-Job `vn.khdl.tennis.weekly` đã được nạp vào launchd: **Thứ Hai 07:40**, chạy `scripts/run_unified_load.py --collect --refresh-reference`. Các job lấy raw hằng ngày 07:10 và gửi lại cảnh báo mỗi 10 phút vẫn được giữ.
+Tại lần nghiệm thu trên macOS ngày 29/10/2026, job `vn.khdl.tennis.weekly` được ghi nhận đã nạp vào launchd: **Thứ Hai 07:40**, chạy `scripts/run_unified_load.py --collect --refresh-reference`; các job lấy raw hằng ngày 07:10 và gửi lại cảnh báo mỗi 10 phút cũng được ghi nhận tại mốc đó. Đây là trạng thái lịch sử, không chứng minh các lịch còn hoạt động hiện nay. Trạng thái hiện tại chưa được xác minh trên checkout Windows.
 
 Đã thử chạy loader bằng launchd với dữ liệu API thật đã lưu: exit 0, không phát sinh HTTP request, dùng lại snapshot. Job thử nghiệm đã được gỡ. Không chạy lại thủ công toàn chuỗi đối soát API 30 ngày trong lần nghiệm thu này để giữ quota; lịch tuần đã được cấu hình, còn bước common load đã chạy thực tế trên dữ liệu đang có.
 
-Snapshot hiện hành được tra qua [CURRENT.json](../runs/unified/CURRENT.json). Không cố định đường dẫn snapshot trong notebook hoặc phần C. Hướng dẫn lệnh chạy, mapping và phục hồi tại [unified_schema.md](../docs/unified_schema.md).
+Các dòng trên ghi trạng thái tại mốc nghiệm thu ngày 29/10/2026, không xác nhận lịch còn hoạt động hiện nay. Báo cáo [live_activation.md](live_activation.md) ghi lần kích hoạt sau đó trong cùng ngày; trạng thái hiện tại chưa được xác minh trên checkout Windows.
+
+Snapshot được nghiệm thu ngày 29/10/2026 nằm trong `runs/unified/`; đây là đầu ra runtime bị Git bỏ qua và không có trong checkout sạch hiện tại. Không coi đường dẫn đó là artifact được bàn giao. Cách tạo lại snapshot, điều kiện nguồn và giới hạn khi thiếu API database được mô tả trong [hướng dẫn schema chung](../docs/unified_schema.md). Phần C historical tiếp tục đọc các bảng đã lưu tại `reports/tables/`.
 
 ## Giới hạn hiện tại
 

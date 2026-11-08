@@ -2,9 +2,11 @@
 
 **Tài liệu bàn giao trực quan hoá:** [nguồn dữ liệu, flow pipeline, ngoại lệ/alert và biểu đồ ưu tiên](docs/data_pipeline_visualization.md) · [sơ đồ SVG](docs/figures/pipeline_flow.svg).
 
-**Bộ dữ liệu chung mới:** [schema chung và incremental load hằng tuần](docs/unified_schema.md). GitHub và API đã được chuẩn hóa định danh, vòng đấu và ý nghĩa trường; bản khởi tạo có 27.644 trận, 14 bảng phân tích. B/C đọc `runs/unified/CURRENT.json`. Job thứ Hai 07:40 thực hiện đối soát API và nạp bộ chung theo chuỗi tuần tự; lịch raw hằng ngày giữ nguyên.
+**Bộ dữ liệu chung:** [schema và hướng dẫn tạo snapshot](docs/unified_schema.md). Biên bản nghiệm thu ngày 29/10/2026 ghi nhận snapshot ban đầu có 27.644 trận (27.574 GitHub và 70 API), cùng 14 bảng. Snapshot ở `runs/unified/` là đầu ra runtime và không được commit; tệp `runs/unified/CURRENT.json` không có trong checkout sạch. Không coi số liệu 70 API trong biên bản là dữ liệu có sẵn ở checkout này.
 
-Dự án triển khai thu thập, kiểm định, làm sạch, tạo đặc trưng và phân tích thống kê theo tài liệu phân công. Dữ liệu thật là đơn nam cấp tour mùa 2015–2025, do Jeff Sackmann / Tennis Abstract biên soạn; sử dụng bản lưu trữ ghim phiên bản vì kho gốc trả về 404 khi triển khai. Đã kèm dữ liệu gốc, dữ liệu xử lý, báo cáo và notebook chạy có kết quả.
+Muốn tạo snapshot chung, dùng macOS/Linux/WSL2, cài dependencies, có dữ liệu raw lịch sử và kết nối GitHub để khởi tạo tham chiếu người chơi. Từ thư mục gốc, chạy `python scripts/run_unified_load.py --refresh-reference`. Nếu chưa có `data/api/tennis.sqlite3`, snapshot chỉ gồm phần lịch sử; lệnh này không tự khôi phục 70 trận API. Lưu ý `--refresh-reference` cũng có thể gọi Tennis API: khi database API đã có trận cần bổ sung metadata nhánh đấu, metadata chưa có trong cache và có `RAPIDAPI_KEY` trong `.env`, quá trình tra cứu có thể gửi request mới và tiêu thụ quota. Database rỗng/không có trận cần tra cứu, metadata đã được cache hoặc thiếu key sẽ không tạo request mạng mới cho việc làm giàu này. Muốn đối soát và nạp dữ liệu API mới, cần cấu hình credential cục bộ và chủ động chạy `python scripts/run_unified_load.py --collect --refresh-reference`; `--collect` gọi luồng đối soát API, còn `--refresh-reference` có thể phát sinh request riêng như điều kiện trên. Chi tiết điều kiện và phục hồi ở [docs/unified_schema.md](docs/unified_schema.md). Script unified hiện dùng `fcntl`, nên không chạy trực tiếp bằng Python Windows native.
+
+Dự án triển khai thu thập, kiểm định, làm sạch, tạo đặc trưng và phân tích thống kê theo tài liệu phân công. Dữ liệu thật là đơn nam cấp tour mùa 2015–2025, do Jeff Sackmann / Tennis Abstract biên soạn; sử dụng bản lưu trữ ghim phiên bản vì kho gốc trả về 404 khi triển khai. Repository gồm mã nguồn, schema, dữ liệu mẫu, báo cáo và notebook. Các thư mục dữ liệu đầy đủ `data/raw/`, `data/interim/` và `data/processed/` bị `.gitignore` bỏ qua; khi checkout mới, tải hoặc tạo lại theo hướng dẫn trong phần Cài đặt và chạy lại.
 
 Đã bổ sung **luồng API cập nhật định kỳ**: [hướng dẫn cấu hình RapidAPI và lịch chạy](docs/api_batch.md). Luồng này lưu SQLite, có quota, phân trang, cập nhật không trùng và xuất dữ liệu bằng B. Báo cáo ghi nhận đã chạy API thật và cài lịch `launchd` trên máy macOS ngày 29 tháng 10 năm 2026; trạng thái lịch hiện thời chưa được xác minh trên checkout Windows này. Xem [báo cáo kích hoạt](reports/live_activation.md). Credential đọc từ `.env` cục bộ, không chia sẻ trong gói bàn giao.
 
@@ -40,14 +42,19 @@ Phần C dùng các bảng historical tại `reports/tables/`, không gộp vớ
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 
+# Mỗi lần chạy cần output directory mới hoặc đang trống; pipeline không ghi artifact vào thư mục gốc
+
 # Dữ liệu raw đã có: xác minh checksum và chạy hoàn toàn offline
-.venv/bin/python scripts/run_pipeline.py --offline
+.venv/bin/python scripts/run_pipeline.py --offline --output-dir ../tennis-output-offline
 
 # Máy mới chưa có raw: tải snapshot ghim commit, rồi xử lý
-.venv/bin/python scripts/run_pipeline.py
+.venv/bin/python scripts/run_pipeline.py --output-dir ../tennis-output-download
 
-# Dữ liệu mẫu chạy cùng pipeline, đầu ra riêng ở runs/sample
-.venv/bin/python scripts/run_pipeline.py --sample
+# Chạy pipeline trên bộ dữ liệu mẫu vào output directory riêng
+.venv/bin/python scripts/run_pipeline.py --sample --output-dir ../tennis-output-sample
+
+# Chỉ tạo lại bộ dữ liệu mẫu khi cần; file được ghi trong output directory đã chọn
+.venv/bin/python scripts/run_pipeline.py --offline --generate-sample --output-dir ../tennis-output-with-sample
 
 # Kiểm thử các quy tắc và chỉ số
 .venv/bin/python -m pytest -q
@@ -63,10 +70,13 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 
 # Dùng dữ liệu raw đã có, chạy hoàn toàn offline
-.\.venv\Scripts\python.exe scripts\run_pipeline.py --offline
+.\.venv\Scripts\python.exe scripts\run_pipeline.py --offline --output-dir ..\tennis-output-offline
 
-# Chạy bộ dữ liệu mẫu vào runs/sample
-.\.venv\Scripts\python.exe scripts\run_pipeline.py --sample
+# Chạy pipeline trên bộ dữ liệu mẫu vào output directory riêng
+.\.venv\Scripts\python.exe scripts\run_pipeline.py --sample --output-dir ..\tennis-output-sample
+
+# Tạo sample riêng trong output directory khi được yêu cầu
+.\.venv\Scripts\python.exe scripts\run_pipeline.py --offline --generate-sample --output-dir ..\tennis-output-with-sample
 
 # Chạy test; basetemp trong project tránh một số cấu hình Windows chặn %TEMP%
 .\.venv\Scripts\python.exe -m pytest -q --basetemp .pytest-tmp -p no:cacheprovider
@@ -75,7 +85,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe scripts\verify_reproducibility.py
 ```
 
-Tùy chọn `--output-dir /path/to/output` ghi kết quả vào thư mục khác để đối chiếu tái lập. Nếu cache raw bị sửa, pipeline dừng vì SHA256 không khớp; khôi phục đúng file nguồn từ URL trong manifest. Không sửa manifest để hợp thức hóa file đã bị thay đổi. Muốn thay snapshot hoặc mùa, tạo bản dự án riêng để giữ phiên bản này tái lập được.
+`--output-dir /path/to/output` là bắt buộc và phải chỉ tới thư mục mới hoặc đang trống; pipeline dừng nếu thư mục đích đã có nội dung hoặc trỏ tới thư mục gốc repository. Nếu cache raw bị sửa, pipeline dừng vì SHA256 không khớp; khôi phục đúng file nguồn từ URL trong manifest. Không sửa manifest để hợp thức hóa file đã bị thay đổi. Muốn thay snapshot hoặc mùa, tạo bản dự án riêng để giữ phiên bản này tái lập được.
 
 ## Chạy notebook
 

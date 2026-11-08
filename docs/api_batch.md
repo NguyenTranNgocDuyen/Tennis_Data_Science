@@ -1,12 +1,12 @@
 # Thu thập tennis định kỳ bằng RapidAPI
 
-**Cập nhật luồng tuần:** cấu hình được nghiệm thu gần nhất dùng job thứ Hai 07:40 chạy `run_unified_load.py --collect --refresh-reference` để đối soát API và incremental load vào schema chung. Lịch lấy raw hằng ngày không đổi. B/C đọc `runs/unified/CURRENT.json`; xem [schema chung](unified_schema.md) thay vì tự nối hai CSV nguồn. Đây là trạng thái cài đặt được ghi nhận trên macOS ngày 29/10/2026; chưa xác minh lịch còn hoạt động trên máy Windows hiện tại.
+**Cập nhật luồng tuần:** biên bản ngày 29/10/2026 ghi nhận job thứ Hai 07:40 dùng `run_unified_load.py --collect --refresh-reference` để đối soát API và nạp tăng dần vào schema chung. Lịch lấy raw hằng ngày không đổi. Đây là trạng thái lịch sử được ghi nhận trên macOS; chưa xác minh lịch hiện còn hoạt động trên checkout Windows. Snapshot `runs/unified/CURRENT.json` là runtime output bị Git bỏ qua, không có sẵn trong checkout sạch. Xem [hướng dẫn schema chung](unified_schema.md) để biết cách tạo snapshot, các điều kiện cần và cách chạy lịch sử khi không có API database.
 
 Phiên bản mới bổ sung replay/resume từ raw, log theo operation và cảnh báo Telegram qua tin nhắn riêng từ bot tới cá nhân bạn. Đọc [hướng dẫn phục hồi và theo dõi](recovery_and_alerts.md). Lịch setup hiện tạo 3 job, gồm thêm flush outbox mỗi 10 phút; các mô tả hai lịch thu thập bên dưới vẫn áp dụng.
 
 Luồng API được triển khai bổ sung cho phần A và dùng lại module làm sạch, tạo đặc trưng, thống kê của B. Dữ liệu lịch sử 2015–2025 và báo cáo hiện có được giữ riêng. API lưu vào SQLite, không sửa CSV nguồn lịch sử và không tự nối ID của hai nhà cung cấp.
 
-Trạng thái mới nhất ngày 29 tháng 10 năm 2026: đã xác thực API thật, thu thập 70 trận đúng phạm vi trong ngày 2026-10-22 đến 2026-10-28, lưu raw/SQLite và xuất 14 bảng B. Ba lịch launchd đã được cài; chi tiết kiểm tra vận hành ở reports/live_activation.md. Demo vẫn là dữ liệu nhân tạo lưu riêng.
+Mốc API thật được ghi nhận ngày 29 tháng 10 năm 2026: đã thu thập 70 trận đúng phạm vi trong ngày 2026-10-22 đến 2026-10-28, lưu raw/SQLite và xuất 14 bảng B. Báo cáo `reports/live_activation.md` ghi nhận việc cài ba lịch sau các nghiệm thu trung gian. Đây là bằng chứng lịch sử; trạng thái lịch hiện tại chưa được xác minh trên checkout Windows. Demo là dữ liệu nhân tạo lưu riêng.
 
 Response thật của nhà cung cấp để trống best_of. Adapter hiện bổ sung từ quy định giải đã kiểm chứng trong config/tennis_format_rules.json, chỉ cho main draw đơn nam năm 2026: cấp tour/Masters/Finals là 3, Grand Slam là 5. Không suy từ số set đã chơi, không thay giá trị API đã cung cấp. provenance.csv ghi best_of_source và best_of_reference. Năm/loại giải ngoài phạm vi quy tắc vẫn để thiếu và bị cách ly; cần rà soát quy định khi sang năm mới.
 
@@ -158,9 +158,9 @@ Snapshot có canonical_input.csv, tennis_matches.csv, player_matches.csv, proven
 
 Demo chỉ ghi `runs/api_demo/`, có mode=demo trong manifest và không có đường nhập vào database thật. Không dùng số liệu demo làm kết luận đồ án.
 
-## Lịch chạy trên máy Mac này
+## Lịch launchd được ghi nhận trên máy Mac ngày 29/10/2026
 
-Đã cài ba job launchd, gồm hai job dữ liệu và một job flush Telegram mỗi 10 phút. Xem reports/live_activation.md cho trạng thái nghiệm thu. Giờ chạy theo timezone của máy: hằng ngày 07:10, thứ Hai 07:40 cho đối soát 30 ngày. Đặt timezone máy là Asia/Ho_Chi_Minh để đúng giờ Việt Nam. Request vẫn dùng ngày UTC để tránh lệch ngày giữa các giải.
+`reports/live_activation.md` ghi nhận ba job launchd đã được nạp tại thời điểm đó: hai job dữ liệu và một job flush Telegram mỗi 10 phút. Đây không xác nhận lịch còn hoạt động hiện nay hoặc trên Windows. Giờ lịch theo timezone máy: hằng ngày 07:10, thứ Hai 07:40 cho đối soát 30 ngày. Request dùng ngày UTC để tránh lệch ngày giữa các giải.
 
 Sau khi chạy batch thật thành công:
 

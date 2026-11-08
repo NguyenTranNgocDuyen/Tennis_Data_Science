@@ -25,8 +25,12 @@ def collect(root: Path, config: dict, offline: bool = False) -> dict:
     """
     raw = root / "data/raw"
     prov = root / "data/provenance"
-    raw.mkdir(parents=True, exist_ok=True)
-    prov.mkdir(parents=True, exist_ok=True)
+    if offline:
+        if not raw.is_dir() or not prov.is_dir():
+            raise FileNotFoundError("Offline mode requires existing raw and provenance directories")
+    else:
+        raw.mkdir(parents=True, exist_ok=True)
+        prov.mkdir(parents=True, exist_ok=True)
     manifest_path = prov / "source_manifest.json"
     old = json.loads(manifest_path.read_text()) if manifest_path.exists() else None
     identity = {k: config[k] for k in ("source_repository", "source_commit", "start_season", "end_season")}
@@ -68,6 +72,8 @@ def collect(root: Path, config: dict, offline: bool = False) -> dict:
     manifest = {**identity, "original_repository": config["original_repository"],
                 "attribution": "Jeff Sackmann / Tennis Abstract", "license": "CC BY-NC-SA 4.0",
                 "files": files}
+    if offline:
+        return old
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
     return manifest
 
